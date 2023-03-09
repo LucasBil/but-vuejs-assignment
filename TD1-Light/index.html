@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TD1 VueJS</title>
+</head>
+<body>
+    <main id="app">
+        <input id="search" v-model="search" type="text">
+        <table>
+            <tr v-for="meme in filteredMemes">
+                <td>{{ meme.name }}</td>
+                <td>
+                    <img :src="meme.url" :alt="meme.name">
+                </td>
+            </tr>
+        </table>
+    </main>
+    <script src="./vue.global.js"></script>
+    <script src="./main.js" defer></script>
+</body>
+</html>
+
+<style>
+    #search {
+        width: 90vw;
+        margin:1vh;
+        position: fixed;
+        bottom: 1vh;
+        left: 5vw;
+    }
+</style>
