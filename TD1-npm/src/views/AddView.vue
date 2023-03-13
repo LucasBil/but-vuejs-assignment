@@ -8,7 +8,6 @@ let memes = ref([]);
 var status_request = ref(false);
 
 let name = ref('');
-let id = ref(-1);
 let search = ref('');
 
 onMounted(async () => {
@@ -34,6 +33,7 @@ function FilterMemes() {
 function AddMeme(){
     store.addmemes.push(
         {
+            id: store.addmemes.length,
             name: name.value,
             url: search.value
         }
@@ -58,7 +58,7 @@ function AddMeme(){
             </RouterLink>
         </div>
         <div class="border">
-            <Card v-for="meme in FilterMemes()" :name="meme.name" :url="meme.url" />
+            <Card v-for="meme in FilterMemes()" :meme="meme" />
         </div>
     </div>
 </template>

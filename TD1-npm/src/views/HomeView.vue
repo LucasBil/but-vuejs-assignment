@@ -6,7 +6,7 @@ import { store } from "../store";
 
 let search = ref("");
 
-let editmeme = ref([]);
+let editmeme = ref({});
 
 function FilterMemes() {
     return store.addmemes.filter((meme) => {
@@ -26,9 +26,9 @@ function EditsMeme(event) {
     <input v-model="search" placeholder="search" class="border-solid p-3 border-red-400 rounded-lg border-2 fixed bottom-3 left-[5vw] w-[90vw]" type="text">
 
     <td class="grid grid-cols-1 justify-center md:grid-cols-2 xl:grid-cols-3">
-        <Card v-for="meme in FilterMemes()" :name="meme.name" :url="meme.url" @emit-meme="EditsMeme($event)" />
+        <Card v-for="meme in FilterMemes()" :meme="meme" @emit-meme="EditsMeme($event)" />
     </td>
 
-    <EditMeme v-if="store.edit" :name="editmeme.name" :url="editmeme.url"/>
+    <EditMeme v-if="store.edit" :_meme="editmeme"/>
 
 </template>

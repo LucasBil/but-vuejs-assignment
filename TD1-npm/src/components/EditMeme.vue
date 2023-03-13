@@ -4,12 +4,8 @@
     import { store } from "../store";
 
     defineProps({
-        name: {
-            type: String,
-            required: true
-        },
-        url: {
-            type: String,
+        _meme: {
+            type: Object,
             required: true
         }
     })
@@ -33,9 +29,14 @@
         });
     });
 
-    function Edit()
+    function Edit(meme)
     {
-        store.addmemes.push({'name':_name.value,'url':_url.value});
+        console.log(_url.value);
+        store.addmemes[meme.id] = {
+            id: meme.id,
+            name: _name.value,
+            url: _url.value
+        }
         store.edit = false;
     }
 
@@ -46,13 +47,13 @@
         <div class="w-1/2 h-[75%] bg-white p-3 rounded-lg gap-3 grid grid-rows-[repeat(9,minmax(0,1fr))] items-center">
             <div>
                 <h1>Name :</h1>
-                <input v-model="_name" :placeholder="name" class="border-solid p-2 rounded-lg border-2 w-full" type="text">
+                <input v-model="_name" :placeholder="_meme.name" class="border-solid p-2 rounded-lg border-2 w-full" type="text">
             </div>
-            <select v-model="_url" name="" id="" class="p-3">
-                <option v-for="meme in memes" :value="meme.url" :selected="url == meme.url">{{ meme.name }}</option>
+            <select @change="_url = $event.target.value" name="" id="" class="p-3">
+                <option v-for="meme in memes" :value="meme.url" :selected="_meme.url == meme.url">{{ meme.name }}</option>
             </select>
-            <img class="object-contain row-span-6 w-full h-full" :src="url" alt="">
-            <button @click="Edit" class="border bg-gray-200 rounded-lg p-3">Edit</button>
+            <img class="object-contain row-span-6 w-full h-full" :src="(_url == '')?_meme.url:_url" alt="">
+            <button @click="Edit(_meme)" class="border bg-gray-200 rounded-lg p-3">Edit</button>
         </div>
     </div>
 </template>
