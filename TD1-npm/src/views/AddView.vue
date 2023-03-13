@@ -8,6 +8,7 @@ let memes = ref([]);
 var status_request = ref(false);
 
 let name = ref('');
+let id = ref(-1);
 let search = ref('');
 
 onMounted(async () => {
